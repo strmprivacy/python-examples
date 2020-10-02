@@ -1,19 +1,15 @@
-# Ugly hack to allow absolute import from the root folder
-# whatever its name is. Please forgive the heresy.
-if __name__ == "__main__" and __package__ is None:
-    from sys import path
-    from os.path import dirname as dir
-
-    path.append(dir(path[0]))
-    __package__ = "examples"
-
 import asyncio
 import logging
 import sys
 
-from examples.args import StreamMachineProperties
-from streammachine.driver import StreamMachineClient, ClientConfig, StreamMachineEvent, current_time_millis, SerializationType
-from streammachine.schema.avro.io.streammachine.schema.avro.strm_avro.v1 import StrmEvent
+from clickstream.io.streammachine.schemas.strmcatalog.clickstream import ClickstreamEvent
+from streammachine.driver import StreamMachineClient, ClientConfig, StreamMachineEvent, current_time_millis, \
+    SerializationType
+
+from args import StreamMachineProperties
+
+log = logging.getLogger(__name__)
+log.setLevel(logging.INFO)
 
 
 class Sender(object):
@@ -23,7 +19,7 @@ class Sender(object):
 
     def __init__(self, billing_id, client_id, client_secret):
         self._config = ClientConfig(log_level=logging.DEBUG)
-        self._client = StreamMachineClient( billing_id, client_id, client_secret, self._config )
+        self._client = StreamMachineClient(billing_id, client_id, client_secret, self._config)
         self._logger = logging.getLogger(__name__)
         self._logger.setLevel(logging.DEBUG)
 
@@ -43,28 +39,33 @@ def create_avro_event() -> StreamMachineEvent:
     create a dummy event
     :return:
     """
-    event = StrmEvent()
-    event.abtests = ["abc"]
+    event = ClickstreamEvent()
+    event.abTests = ["abc"]
+    event.eventType = "button x clicked"
     event.customer.id = "integration-test"
-    event.sessionId = "session-01"
+    event.referrer = "https://www.streammachine.io"
+    event.userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
+    event.producerSessionId = "session-01"
+    event.conversion = 1
+
     event.strmMeta.timestamp = current_time_millis()
-    event.strmMeta.schemaId = "schema_avro"
-    event.strmMeta.nonce = 1
-    event.strmMeta.keyLink = 2
+    event.strmMeta.schemaId = "clickstream"
+    event.strmMeta.nonce = 0
     event.strmMeta.consentLevels = [0, 1, 2]
-    event.url = "bananas"
+    event.url = "https://portal.streammachine.io"
+
     return event
 
 
 async def main(props):
     sender = Sender(props.billing_id, props.client_id, props.client_secret)
     await sender.start_timers()  # re-authorization jwt tokens
-    async for event in sender:
-        if event == 204:  # event correctly accepted by endpoint
-            print(".", end='', flush=True)
+
+    async for response in sender:
+        if response == 204:  # event correctly accepted by endpoint
+            log.info(f"Event sent, response {response}")
         else:
-            print()
-            print("event", event)
+            log.error(f"Something went wrong while trying to send event to Stream Machine, response: {response}")
 
         await asyncio.sleep(0.2)
 
