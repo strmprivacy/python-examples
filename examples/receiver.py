@@ -8,7 +8,7 @@ from streammachine.driver import StreamMachineClient, ClientConfig
 from args import StreamMachineProperties
 
 
-async def eventHandler(event):
+async def event_handler(event):
     """
     callback handler for the events from Streammachine
 
@@ -27,7 +27,7 @@ async def main(props):
     config = ClientConfig(log_level=logging.DEBUG)
     client = StreamMachineClient(props.billing_id, props.client_id, props.client_secret, config)
     await client.start_timers()
-    await client.start_receiving_sse(True, eventHandler)
+    await client.start_receiving_sse(True, event_handler)
 
 
 if __name__ == '__main__':
