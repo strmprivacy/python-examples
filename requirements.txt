@@ -1,2 +1,2 @@
-streammachine-driver==0.0.6
-streammachine-schemas-catalog-clickstream-avro==0.0.3
+streammachine-driver==0.0.10
+streammachine-public-schemas-clickstream==0.2.0
