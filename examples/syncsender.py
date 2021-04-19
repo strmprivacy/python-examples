@@ -2,7 +2,7 @@ import logging
 import sys
 import time
 
-from clickstream.io.streammachine.schemas.strmcatalog.clickstream import ClickstreamEvent
+from clickstream.io.streammachine.public_schemas.clickstream import ClickstreamEvent
 from streammachine.driver import StreamMachineEvent, current_time_millis
 from streammachine.driver.client.syncsender import SyncSender
 

@@ -2,7 +2,8 @@ import asyncio
 import logging
 import sys
 
-from clickstream.io.streammachine.schemas.strmcatalog.clickstream import ClickstreamEvent
+from clickstream.io.streammachine.public_schemas.clickstream import ClickstreamEvent
+
 from streammachine.driver import StreamMachineClient, ClientConfig, StreamMachineEvent, current_time_millis, \
     SerializationType
 
