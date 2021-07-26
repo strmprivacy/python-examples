@@ -2,7 +2,7 @@ import asyncio
 import logging
 import sys
 
-from clickstream.io.streammachine.public_schemas.clickstream import ClickstreamEvent
+from clickstream.io.streammachine.schemas.strmcatalog.clickstream import ClickstreamEvent
 
 from streammachine.driver import StreamMachineClient, ClientConfig, StreamMachineEvent, current_time_millis, \
     SerializationType
@@ -50,8 +50,7 @@ def create_avro_event() -> StreamMachineEvent:
     event.conversion = 1
 
     event.strmMeta.timestamp = current_time_millis()
-    event.strmMeta.schemaId = "clickstream"
-    event.strmMeta.nonce = 0
+    event.strmMeta.eventContractRef = "TODO fill in"
     event.strmMeta.consentLevels = [0, 1, 2]
     event.url = "https://portal.streammachine.io"
 
