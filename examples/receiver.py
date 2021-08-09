@@ -3,9 +3,8 @@ import json
 import logging
 import sys
 
-from streammachine.driver import StreamMachineClient, ClientConfig
-
 from args import StreamMachineProperties
+from client_builder import ClientBuilder
 
 
 async def event_handler(event):
@@ -24,8 +23,7 @@ async def main(props):
     """
     Your async main code that instantiates the client, starts its re-authorization timer, and installs a callback
     """
-    config = ClientConfig(log_level=logging.DEBUG)
-    client = StreamMachineClient(props.billing_id, props.client_id, props.client_secret, config)
+    client = ClientBuilder.create_stream_machine_client()
     await client.start_timers()
     await client.start_receiving_ws(True, event_handler)
 
