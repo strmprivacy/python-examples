@@ -39,7 +39,7 @@ def create_avro_event():
     event.unique_identifier = "string"
     event.some_sensitive_value = "A value that should be encrypted"
     event.consistent_value = "a-user-session"
-    event.not_sensitive_value = "Anyone is free to see this text."
+    event.not_sensitive_value = "Hello from Python"
 
     return event
 
