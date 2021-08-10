@@ -36,10 +36,10 @@ def create_avro_event():
     event.strmMeta.eventContractRef = "streammachine/example/1.2.3"
     event.strmMeta.consentLevels = [0]
 
-    event.unique_identifier = "string"
-    event.some_sensitive_value = "A value that should be encrypted"
-    event.consistent_value = "a-user-session"
-    event.not_sensitive_value = "Hello from Python"
+    event.uniqueIdentifier = "string"
+    event.someSensitiveValue = "A value that should be encrypted"
+    event.consistentValue = "a-user-session"
+    event.notSensitiveValue = "Hello from Python"
 
     return event
 
