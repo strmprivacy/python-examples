@@ -1,6 +1,8 @@
 import asyncio
 import logging
 import sys
+import random
+import uuid
 
 from streammachine.driver import SerializationType
 from streammachine_io_streammachine_schemas_demo_v1.io.streammachine.schemas.demo.v1 import DemoEvent
@@ -33,10 +35,10 @@ class Sender(object):
 def create_avro_event():
     event = DemoEvent()
 
-    event.strmMeta.eventContractRef = "streammachine/example/1.2.3"
-    event.strmMeta.consentLevels = [0]
+    event.strmMeta.eventContractRef = "streammachine/example/1.3.0"
+    event.strmMeta.consentLevels = [random.randint(0, 3)]
 
-    event.uniqueIdentifier = "string"
+    event.uniqueIdentifier = str(uuid.uuid4())
     event.someSensitiveValue = "A value that should be encrypted"
     event.consistentValue = "a-user-session"
     event.notSensitiveValue = "Hello from Python"

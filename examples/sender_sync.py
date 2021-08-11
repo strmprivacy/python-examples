@@ -13,13 +13,13 @@ from args import StreamMachineProperties
 def create_avro_event():
     event = DemoEvent()
 
-    event.strmMeta.eventContractRef = "streammachine/example/1.2.3"
+    event.strmMeta.eventContractRef = "streammachine/example/1.3.0"
     event.strmMeta.consentLevels = [random.randint(0, 3)]
 
-    event.unique_identifier = str(uuid.uuid4())
-    event.some_sensitive_value = "A value that should be encrypted"
-    event.consistent_value = "a-user-session"
-    event.not_sensitive_value = "Anyone is free to see this text."
+    event.uniqueIdentifier = str(uuid.uuid4())
+    event.someSensitiveValue = "A value that should be encrypted"
+    event.consistentValue = "a-user-session"
+    event.notSensitiveValue = "Hello from Python"
 
     return event
 
@@ -35,7 +35,8 @@ def main():
 
     while True:
         event = create_avro_event()
-        sender.send_event(event)
+        r = sender.send_event(event)
+        print(r)
         time.sleep(0.2)
 
 
