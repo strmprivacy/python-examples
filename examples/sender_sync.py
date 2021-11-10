@@ -4,10 +4,10 @@ import sys
 import time
 import uuid
 
-from streammachine.driver.client.syncsender import SyncSender
+from strmprivacy.driver.client.syncsender import SyncSender
 from streammachine_io_streammachine_schemas_demo_v1.io.streammachine.schemas.demo.v1 import DemoEvent
 
-from args import StreamMachineProperties
+from args import StrmPrivacyProperties
 
 
 def create_avro_event():
@@ -25,7 +25,7 @@ def create_avro_event():
 
 
 def main():
-    props = StreamMachineProperties.from_args()
+    props = StrmPrivacyProperties.from_args()
     logging.basicConfig(stream=sys.stderr)
 
     sender = SyncSender(props.billing_id, props.client_id, props.client_secret)

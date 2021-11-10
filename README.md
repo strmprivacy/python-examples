@@ -17,5 +17,5 @@ Ensure that the following `strmMeta` schema properties are filled out:
 
 ## Need help?
 
-See our [documentation](https://docs.streammachine.io) or [reach out to us](https://docs.streammachine.io/docs/latest/contact/index.html).
+See our [documentation](https://docs.strmprivacy.io) or [reach out to us](https://docs.strmprivacy.io/docs/latest/contact/index.html).
 
