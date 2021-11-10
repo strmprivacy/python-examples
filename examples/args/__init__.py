@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class StreamMachineProperties(object):
+class StrmPrivacyProperties(object):
     billing_id: str
     client_id: str
     client_secret: str
@@ -26,4 +26,4 @@ class StreamMachineProperties(object):
 
         args = parser.parse_args()
 
-        return StreamMachineProperties(args.billing_id, args.client_id, args.client_secret)
+        return StrmPrivacyProperties(args.billing_id, args.client_id, args.client_secret)

@@ -4,7 +4,7 @@ import sys
 import random
 import uuid
 
-from streammachine.driver import SerializationType
+from strmprivacy.driver import SerializationType
 from streammachine_io_streammachine_schemas_demo_v1.io.streammachine.schemas.demo.v1 import DemoEvent
 
 from client_builder import ClientBuilder
@@ -15,11 +15,11 @@ log.setLevel(logging.INFO)
 
 class Sender(object):
     """
-    An Asynchronous generator that periodically creates an event and sends it to streammachine
+    An Asynchronous generator that periodically creates an event and sends it to STRM Privacy
     """
 
     def __init__(self):
-        self._client = ClientBuilder.create_stream_machine_client()
+        self._client = ClientBuilder.create_strm_privacy_client()
 
     def __aiter__(self):
         return self
