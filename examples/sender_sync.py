@@ -13,7 +13,7 @@ from args import StrmPrivacyProperties
 def create_avro_event():
     event = DemoEvent()
 
-    event.strmMeta.eventContractRef = "streammachine/example/1.3.0"
+    event.strmMeta.eventContractRef = "streammachine/example/1.2.3"
     event.strmMeta.consentLevels = [random.randint(0, 3)]
 
     event.uniqueIdentifier = str(uuid.uuid4())
