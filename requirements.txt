@@ -1,2 +1,2 @@
 strmprivacy-driver==2.0.0
-strmprivacy-schemas-demo-avro==1.0.2
+strmprivacy-schemas-demo-avro==1.0.2.post1

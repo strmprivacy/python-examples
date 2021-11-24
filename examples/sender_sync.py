@@ -5,7 +5,7 @@ import time
 import uuid
 
 from strmprivacy.driver.client.syncsender import SyncSender
-from streammachine_io_streammachine_schemas_demo_v1.io.streammachine.schemas.demo.v1 import DemoEvent
+from strmprivacy_io_strmprivacy_schemas_demo_v1.io.strmprivacy.schemas.demo.v1 import DemoEvent
 
 from args import StrmPrivacyProperties
 
@@ -13,7 +13,7 @@ from args import StrmPrivacyProperties
 def create_avro_event():
     event = DemoEvent()
 
-    event.strmMeta.eventContractRef = "streammachine/example/1.2.3"
+    event.strmMeta.eventContractRef = "strmprivacy/example/1.2.3"
     event.strmMeta.consentLevels = [random.randint(0, 3)]
 
     event.uniqueIdentifier = str(uuid.uuid4())

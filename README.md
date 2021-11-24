@@ -12,7 +12,7 @@ Before you can run the examples, ensure to run `make install-dependencies`, whic
 
 Ensure that the following `strmMeta` schema properties are filled out:
 
-- `eventContractRef`: should be a full reference to the Event Contract that you want to use for the events you're sending. Example: `streammachine/example/1.2.3`
+- `eventContractRef`: should be a full reference to the Event Contract that you want to use for the events you're sending. Example: `strmprivacy/example/1.2.3`
 - `consentLevels`: should be the consent levels that are applicable for the event being sent. Typically, this matches the consent given by the end user.
 
 ## Need help?
