@@ -11,6 +11,8 @@ class ClientBuilder(object):
     def create_strm_privacy_client() -> StrmPrivacyClient:
         args = StrmPrivacyProperties.from_args()
 
-        config = ClientConfig(log_level=logging.DEBUG)
+        config = ClientConfig(
+            log_level=logging.DEBUG,
+        )
 
-        return StrmPrivacyClient(args.billing_id, args.client_id, args.client_secret, config)
+        return StrmPrivacyClient(args.client_id, args.client_secret, config)
