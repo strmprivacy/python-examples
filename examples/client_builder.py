@@ -13,8 +13,6 @@ class ClientBuilder(object):
 
         config = ClientConfig(
             log_level=logging.DEBUG,
-            gateway_host=args.gateway_host,
-            auth_host=args.auth_host
         )
 
         return StrmPrivacyClient(args.client_id, args.client_secret, config)
