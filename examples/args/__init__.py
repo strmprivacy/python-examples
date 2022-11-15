@@ -7,7 +7,6 @@ class StrmPrivacyProperties(object):
     client_id: str
     client_secret: str
 
-
     @classmethod
     def from_args(cls):
         parser = ArgumentParser()

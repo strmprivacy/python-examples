@@ -1,6 +1,5 @@
 import asyncio
 import logging
-import sys
 import random
 import uuid
 
@@ -47,18 +46,25 @@ def create_avro_event():
 
 
 async def main():
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+
     sender = Sender()
     await sender.start_timers()  # re-authorization jwt tokens
 
-    async for response in sender:
-        if response == 204:  # event correctly accepted by endpoint
-            log.info(f"Event sent, response {response}")
-        else:
-            log.error(f"Something went wrong while trying to send event to Stream Machine, response: {response}")
+    logger.info("Started async sender. Only error responses are logged by the client.")
 
+    count = 0
+
+    async for response in sender:
+        if response != 204:
+            log.error(f"Something went wrong while trying to send event to STRM Privacy, response: {response}")
         await asyncio.sleep(0.2)
+
+        count += 1
+        if count % 5 == 0:
+            logger.info("Sent %s events", count)
 
 
 if __name__ == '__main__':
-    logging.basicConfig(stream=sys.stderr)
     asyncio.run(main())

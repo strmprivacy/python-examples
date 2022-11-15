@@ -26,18 +26,25 @@ def create_avro_event():
 
 def main():
     props = StrmPrivacyProperties.from_args()
-    logging.basicConfig(stream=sys.stderr)
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
 
-    sender = SyncSender(props.billing_id, props.client_id, props.client_secret)
+    sender = SyncSender(props.client_id, props.client_secret)
     sender.start()
-
     sender.wait_ready()
+
+    logger.info("Started sync sender. Only error responses are logged by the client.")
+
+    count = 0
 
     while True:
         event = create_avro_event()
-        r = sender.send_event(event)
-        print(r)
+        sender.send_event(event)
         time.sleep(0.2)
+        count += 1
+
+        if count % 5 == 0:
+            logger.info("Sent %s events", count)
 
 
 if __name__ == '__main__':
